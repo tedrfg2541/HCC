@@ -146,6 +146,8 @@ class task1_2(object):
 		self.MAXAREA = 18000
 		self.MINAREA = 1000
 		self.brand = ['doublemint', 'kinder', 'kusan']
+		####
+		self.pub_pos = rospy.Publisher("/HCC/position",np.array,queue_size=10)
 		rospy.loginfo("Service ready!")
 
 
