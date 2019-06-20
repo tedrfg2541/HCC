@@ -1,0 +1,13 @@
+docker run -it --rm \
+ --name sis --net host\
+ --device=/dev/nvhost-ctrl\
+ --device=/dev/nvhost-ctrl-gpu\
+ --device=/dev/nvhost-prof-gpu\
+ --device=/dev/nvmap\
+ --device=/dev/nvhost-gpu\
+ --device=/dev/nvhost-as-gpu\
+ -v /usr/lib/aarch64-linux-gnu/tegra:/usr/lib/aarch64-linux-gnu/tegra\
+ -e DISPLAY=$DISPLAY\
+ -v /tmp/.X11-unix/:/tmp/.X11-unix\
+ --volume $HOME/:/hosthome/\
+ --privileged -v /dev/bus/usb:/dev/bus/usb sis_competition bash
