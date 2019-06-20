@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="object_detection" type="task1_2_ros.py" name="task1_2" output="screen"/>
+</launch>
