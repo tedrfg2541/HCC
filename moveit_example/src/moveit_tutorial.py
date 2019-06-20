@@ -10,8 +10,6 @@ from std_msgs.msg import String, Float64
 from moveit_commander.conversions import pose_to_list
 import ik_4dof
 
-import numpy as np
-
 class moveit_tutorial(object):
 	def __init__(self):
 		# initial publisher for gripper command topic which is used for gripper control
@@ -98,7 +96,7 @@ class moveit_tutorial(object):
 
 		### Go home
 		self.home() 
-		self.listener()
+		
 
 
 	def home(self):
@@ -125,11 +123,11 @@ class moveit_tutorial(object):
 		
 	def onShutdown(self):
 		rospy.loginfo("Shutdown.")
-	def move(data):
+	def move(self,x,y,z):
 		pose_goal = Pose()
-		pose_goal.position.x = data[0]
-		pose_goal.position.y = data[1]
-		pose_goal.position.z = data[2]
+		pose_goal.position.x = x
+		pose_goal.position.y = y
+		pose_goal.position.z = z
 		# ik_4dof.ik_solver(x, y, z, degree)
 		joint_value = ik_4dof.ik_solver(pose_goal.position.x, pose_goal.position.y, pose_goal.position.z, -90)
 
@@ -142,24 +140,25 @@ class moveit_tutorial(object):
 			except:
 				rospy.loginfo(str(joint) + " isn't a valid configuration.")
 
-	def listener():
-		rospy.Subscriber("/HCC/position", np.array, move)
-		rospy.spin()
 		
 
 if __name__ == '__main__': 
 	rospy.init_node('moveit_tutorial',anonymous=False)
 	rospy.sleep(2)
+	x = input()
+	y = input()
+	z = input()
+	print(x)
+	print(y)
+	print(z)
 	moveit_tutorial = moveit_tutorial()
 	#y range -0.17~0.17
-	'''
 	for x in range(4,10):
                 for y in range(0,7):
                         x = float(x)/10
                         y = y*0.05 - 0.15
                         z = 0.0
 			moveit_tutorial.move(x,y,z)	
-	'''
 	moveit_tutorial.home()
 	rospy.on_shutdown(moveit_tutorial.onShutdown)
 	rospy.spin()

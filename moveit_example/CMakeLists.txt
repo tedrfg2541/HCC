@@ -57,6 +57,7 @@ add_service_files(
   FILES
   tag.srv
   home.srv
+  Move_Arm.srv
 )
 
 ## Generate actions in the 'action' folder
